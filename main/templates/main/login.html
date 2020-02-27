@@ -1,0 +1,16 @@
+{% extends "main/header.html" %}
+{% block content %}
+      <div class="container" style="width: 50%;margin-top: 10px;background-image: url(../img/punc.jpg)">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button style="background-color:rgb(63, 63, 241); color:whitesmoke" 
+        class="btn btn-outline-info" type="submit">
+            Login
+        </button>
+    </form>
+
+    <p>If you dont have a account <a href="/register" target="blank">REGISTER.</a></p>
+</div>
+
+{% endblock %}

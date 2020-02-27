@@ -1,0 +1,353 @@
+{% include "main/includes/messages.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+       .bg{
+           background-color: #333;
+           height: 100%;
+           width:100%;
+           
+       }
+       
+        .quiz-wrapper {
+            position: relative;
+            display: block;
+            width: 810px;
+            height: 680px;
+           
+        }
+
+        .collapsible-body{
+            background-color: white;
+            
+        }
+
+        .collapsible {
+            border: 2px solid black;
+        }
+
+        .div1 {
+            width: 350px;
+            height: 70px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        .questions {
+            color: #ccccff;
+            font-style: normal;
+            font-size: 2.5vw;
+            /*font-size: 35px;*/
+            font-weight: normal;
+        }
+
+        ul.options {
+            position: relative;
+            display: inline-block;
+            vertical-align: top;
+            width: 165px;
+            color: white;
+            font-style: normal;
+            font-size: 3vw;
+            /*font-size: 35px;*/
+            /*font-weight: bold;*/
+            /*list-style: none;*/
+            /*border: 1px solid #19286C;*/
+            text-align: center;
+            padding: 5px;
+            margin: 0;
+        }
+
+        li {
+            border: 1px solid transparent;
+            padding: 6px 8px;
+        }
+
+        li.option {
+            display: block;
+            position: relative;
+            z-index: 50;
+            font-size: 13px;
+        }
+
+        #drag1 {
+            font-size: 30px;
+        }
+
+        #drag2 {
+            font-size: 30px;
+        }
+
+        #drag3 {
+            font-size: 30px;
+        }
+
+        #drag4 {
+            font-size: 30px;
+        }
+
+        #questions {
+            position: relative;
+            top: 70px;
+            font-size: 30px;
+
+        }
+
+        .target {
+            display: inline-block;
+            width: 30px;
+            background:  #333;
+            margin: 0 3px;
+            text-align: center;
+
+        }
+        .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+      /* Modal Content */
+          .modal-content {
+           
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            top:250px;
+            left:70px;
+            height:200px;
+         
+          }
+        .model{
+            width: 100%;
+            height: 100%;
+        }  
+
+          .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+          }
+
+          .close:hover,
+          .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+          }
+             .m-container{
+              
+               font-size: 40px;
+               text-align: center;
+               font-family: 'Times New Roman', Times, serif;
+             }
+             #myModal1{
+                 width:100%;
+                 height:100%;
+             }   
+    </style>
+    <!--<title>Login</title>-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <link rel = "stylesheet"
+    href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+ <link rel = "stylesheet"
+    href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+ <script type = "text/javascript"
+    src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+ <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+ </script>
+
+    <script>M.AutoInit();</script>
+
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData('text', ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData('text');
+            ev.target.appendChild(document.getElementById(data));
+        }
+        
+    </script>
+</head>
+
+<body>
+       <div class="bg">
+                         
+            <section class="container-fluid bg">
+                <section class="row justify-content-center">
+                    <br>
+                    <div class="quiz-wrapper" style="top:75px;right:105px;">
+                        <div class="questions" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            
+                            {{ que.questionb }}<span class="target" id="target" data-accept="{{ que.answer }}">&nbsp;</span>{{ que.questiona }}
+                                
+                        </div>
+                        <br>
+                        <ul id="options" class="options">
+
+                            <li class="option" data-target="{{ que.optiona }}" text id="drag1" draggable="true" name="{{ que.id }}" value="{{ que.optiona }}"
+                                ondragstart="drag(event)">{{ que.optiona }}
+                            </li>
+                            <li class="option" data-target="{{ que.optionb }}" text id="drag2" draggable="true" name="{{ que.id }}" value="{{ que.optionb }}"
+                                ondragstart="drag(event)">{{ que.optionb }}
+                            </li>
+                            <li class="option" data-target="{{ que.optionc }}" text id="drag3" draggable="true" name="{{ que.id }}" value="{{ que.optionc }}"
+                                ondragstart="drag(event)">{{ que.optionc }}
+                            </li>
+                            <li class="option" data-target="{{ que.optiond }}" text id="drag4" draggable="true" name="{{ que.id }}" value="{{ que.optiond }}"
+                                ondragstart="drag(event)">{{ que.optiond }}
+                            </li>
+
+                        </ul>
+                        <br>
+                        <br>
+                        <button type="button" class="btn btn-info" id="btn1" onclick="check()">Submit</button>
+
+                        <div id="myModal1" class="modal">
+                                <div class="modal-content" style="width:50%" >
+                                     <div class="m-container">
+                                   <span class="close">&times;</span>
+                                   <p>Correct Answer</p>
+                                   <h5>Congratulations!!</h5>
+                                 </div>
+                                             </div>
+                     
+                     
+                     
+                     
+                     </div>
+                     <div id="myModal2" class="modal">
+                                <div class="modal-content" style="width:50%"  >
+                                     <div class="m-container">
+                                   <span class="close">&times;</span>
+                                   <p>Wrong Answer</p>
+                                   <h5>Correct answer is {{ que.answer }}</h5>
+                                 </div>
+                                             </div>
+                     
+                     
+                     
+                     
+                     </div>
+                                 <p id="demo"></p>
+                                
+
+                        <script>
+                                function check() {
+                                  // let answer= 
+                                  var str1 = "{{ que.answer }}";               
+                                  var str2 = document.getElementById('target').textContent;
+                                  // var str2 = document.getElementById('options)
+                                  console.log(str1);
+                                  console.log(str2.trim());
+                                  var n = str2.trim().localeCompare(str1);
+                                 
+                                  //document.getElementById("demo").innerHTML = n;
+                                  if(n==0)
+                                  {
+                                    var modal = document.getElementById("myModal1");
+                                    var btn = document.getElementById("btn1");
+                                    var span = document.getElementsByClassName("close")[0];
+                                                  //btn.onclick = function() {
+                                 modal.style.display = "block";
+                                 document.getElementById("myModal1").style.backgroundColor = "green";
+                                 document.getElementById("myModal1").style.width = "100%";
+                                 document.getElementById("myModal1").style.height = "100%";
+                                 
+                                 
+                                 span.onclick = function() {
+                                  modal.style.display = "none";
+                                  window.location.href="questions";
+
+                                }
+                  
+                                window.onclick = function(event) {
+                                  if (event.target == modal) {
+                                    modal.style.display = "none";
+                                  window.location.href="questions";
+
+                                  }
+                                }
+                                  }
+                   
+                                  
+                                  else{
+                                    var modal = document.getElementById("myModal2");
+                                    var btn = document.getElementById("btn1");
+                                    var span = document.getElementsByClassName("close")[0];
+                                                  //btn.onclick = function() {
+                                 modal.style.display = "block";
+                                 document.getElementById("myModal2").style.backgroundColor = "red";
+                                 document.getElementById("myModal2").style.width = "100%";
+                                 document.getElementById("myModal2").style.height = "100%";
+
+                                span.onclick = function() {
+                                  modal.style.display = "none";
+                                  window.location.href="questions";
+                                }
+                  
+                                window.onclick = function(event) {
+                                  if (event.target == modal) {
+                                    modal.style.display = "none";
+                                  window.location.href="questions";
+
+                                  }
+                                }
+                                    
+                                }
+                                 
+                                }
+                              </script>
+                    </div>
+                </section>
+                <p id="demo"></p>
+
+            </section>
+           
+            {% csrf_token %}
+        
+       </div>
+            
+<div style="position:fixed;right:90px;top:85px;width:350px;">
+        
+        <ul class = "collapsible popout" data-collapsible = "accordion">
+               
+            {% for que in sidebar %}
+           
+            <li>
+                <div class="collapsible-header">{{ que.questionb }}</div>
+                <div class="collapsible-body">
+                    
+                    <p><a href="/{{que.ques_slug}}"><button class="btn waves-effect waves-light right-align" style="background-color:#2bbbad; color:white">Solve</button></a></p>
+                </div>
+            </li>
+          
+            {% endfor %}
+        </ul>
+        <a href="/"><button type="button" class="btn btn-info" id="btn4" style="left:40px;">Quit</button></a>
+
+</div>
+
+</body>
+{% csrf_token %}
+</html>
+{% endblock %}

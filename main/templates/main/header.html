@@ -1,0 +1,40 @@
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <style>
+    .helptext{
+        visibility: hidden;
+      }
+      #hint_id_password2
+      {
+          display: none;
+      }
+    </style>      
+</head>
+
+<body>
+
+    {% include "main/includes/messages.html" %}
+    {% include "main/includes/navbar.html" %}
+
+    <div class="container">
+         {% block content %}
+
+         {% endblock %}
+    </div>
+  
+
+
+</body>
+
+<script>M.AutoInit();</script>
+
+
+
+
+
+

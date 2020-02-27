@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://kit.fontawesome.com/f3eaa18d3d.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+  <title>Quiz</title>
+  <style>
+    body {
+      color: #fff;
+      background: #333;
+      background-image: url("main/img/punc.jpg");
+     /* background-image: linear-gradient(to right, #333333, rgb(44, 44, 114), #000099);*/
+    }
+
+    .navbar {
+      border-bottom: #008ed6 5px solid;
+      opacity: 0.8;
+    }
+    a.nav-link{
+      font-size: 17px;      
+    }
+    a.navbar-brand{
+      font-size: 27px;      
+
+    }
+    label{
+      font-size: 17px;      
+
+    }
+  </style>
+</head>
+
+<body data-spy="scroll" data-target="#main-nav" id="home">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
+    <div class="container">
+      <a class="navbar-brand" href="/">Punctuations</a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="right hide-on-med-and-down">
+          <li class="nav-item">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link">{{user.username|title}}</a></li>
+          <li class="nav-item"><a href="/questions" class="nav-link">Quiz</a> </li>
+          <li class="nav-item"><a href="/logout" class="nav-link">Logout</a> </li>
+
+          {% else %}
+          <li class="nav-item">
+            <a href="/login" class="nav-link">Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="/register" class="nav-link">Register</a>
+          </li>
+          
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</body>
+
+</html>
